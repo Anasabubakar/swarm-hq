@@ -1,0 +1,109 @@
+@import "tailwindcss";
+
+:root {
+  --bg-primary: #0a0a0f;
+  --bg-secondary: #12121a;
+  --bg-card: #1a1a2e;
+  --bg-card-hover: #222240;
+  --text-primary: #e8e8f0;
+  --text-secondary: #8888aa;
+  --text-muted: #555570;
+  --border-color: #2a2a45;
+  --glow-active: #00ff88;
+  --glow-idle: #ffcc00;
+  --glow-busy: #ff4444;
+  --glow-offline: #555570;
+
+  /* Department colors */
+  --dept-academic: #a855f7;
+  --dept-core: #3b82f6;
+  --dept-creative: #f97316;
+  --dept-design: #ec4899;
+  --dept-ecc: #14b8a6;
+  --dept-engineering: #06b6d4;
+  --dept-game-development: #8b5cf6;
+  --dept-gsd: #f59e0b;
+  --dept-integrations: #6366f1;
+  --dept-management: #ef4444;
+  --dept-marketing: #10b981;
+  --dept-paid-media: #f43f5e;
+  --dept-product: #0ea5e9;
+  --dept-project-management: #d946ef;
+  --dept-sales: #eab308;
+  --dept-spatial-computing: #7c3aed;
+  --dept-specialized: #64748b;
+  --dept-strategy: #0891b2;
+  --dept-support: #22c55e;
+  --dept-testing: #e11d48;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+.float-animation {
+  animation: float 3s ease-in-out infinite;
+}
+
+.status-glow {
+  position: relative;
+}
+
+.status-glow::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  opacity: 0.5;
+  z-index: -1;
+  animation: pulse-glow 2s ease-in-out infinite;
+}
