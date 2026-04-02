@@ -1,21 +1,24 @@
 @import "tailwindcss";
 
 :root {
-  --bg-primary: #0a0a0f;
-  --bg-secondary: #12121a;
-  --bg-card: #1a1a2e;
-  --bg-card-hover: #222240;
-  --text-primary: #e8e8f0;
-  --text-secondary: #8888aa;
-  --text-muted: #555570;
-  --border-color: #2a2a45;
-  --glow-active: #00ff88;
-  --glow-idle: #ffcc00;
-  --glow-busy: #ff4444;
-  --glow-offline: #555570;
+  --bg-primary: #fafafa;
+  --bg-secondary: #f5f5f5;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f9f9f9;
+  --text-primary: #18181b;
+  --text-secondary: #52525b;
+  --text-muted: #a1a1aa;
+  --border-color: #e4e4e7;
+  --border-hover: #d4d4d8;
 
-  /* Department colors */
-  --dept-academic: #a855f7;
+  /* Status colors */
+  --status-active: #22c55e;
+  --status-idle: #eab308;
+  --status-busy: #ef4444;
+  --status-offline: #a1a1aa;
+
+  /* Department colors (muted) */
+  --dept-academic: #8b5cf6;
   --dept-core: #3b82f6;
   --dept-creative: #f97316;
   --dept-design: #ec4899;
@@ -52,6 +55,8 @@ body {
   color: var(--text-primary);
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 #root {
@@ -63,7 +68,7 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--bg-primary);
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -75,35 +80,11 @@ body {
   background: var(--text-muted);
 }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-6px); }
+/* Minimal transitions */
+.transition-colors {
+  transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
 }
 
-@keyframes pulse-glow {
-  0%, 100% { opacity: 0.4; }
-  50% { opacity: 1; }
-}
-
-@keyframes scanline {
-  0% { transform: translateY(-100%); }
-  100% { transform: translateY(100vh); }
-}
-
-.float-animation {
-  animation: float 3s ease-in-out infinite;
-}
-
-.status-glow {
-  position: relative;
-}
-
-.status-glow::after {
-  content: '';
-  position: absolute;
-  inset: -2px;
-  border-radius: inherit;
-  opacity: 0.5;
-  z-index: -1;
-  animation: pulse-glow 2s ease-in-out infinite;
+.transition-opacity {
+  transition: opacity 0.15s ease;
 }

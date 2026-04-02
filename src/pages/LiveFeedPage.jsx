@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
 import LiveFeed from '../components/LiveFeed';
 import { departmentMeta } from '../data/agents';
 
@@ -7,76 +6,56 @@ export default function LiveFeedPage() {
   const [filter, setFilter] = useState(null);
 
   return (
-    <div className="max-w-5xl mx-auto px-4 py-6">
+    <div className="max-w-5xl mx-auto px-6 py-8">
       {/* Header */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="mb-6"
-      >
-        <h2 className="text-3xl font-black mb-2" style={{ color: 'var(--text-primary)' }}>
-          📡 Live Activity Feed
+      <div className="mb-6">
+        <h2 className="text-xl font-semibold mb-1" style={{ color: 'var(--text-primary)' }}>
+          Live Activity Feed
         </h2>
         <p className="text-sm" style={{ color: 'var(--text-muted)' }}>
           Real-time agent activity across all departments. Hover to pause.
         </p>
-      </motion.div>
+      </div>
 
       {/* Department Filter */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.2 }}
-        className="mb-6"
-      >
-        <div className="flex flex-wrap gap-2">
+      <div className="mb-6">
+        <div className="flex flex-wrap gap-1.5">
           <FilterButton
-            label="All Departments"
-            emoji="🌐"
+            label="All"
             isActive={!filter}
             onClick={() => setFilter(null)}
-            color="#3b82f6"
           />
           {Object.entries(departmentMeta).map(([key, meta]) => (
             <FilterButton
               key={key}
               label={meta.label}
-              emoji={meta.emoji}
               isActive={filter === key}
               onClick={() => setFilter(filter === key ? null : key)}
               color={meta.color}
             />
           ))}
         </div>
-      </motion.div>
+      </div>
 
       {/* Feed */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.3 }}
-      >
-        <LiveFeed filterDept={filter} maxHeight="calc(100vh - 280px)" />
-      </motion.div>
+      <LiveFeed filterDept={filter} maxHeight="calc(100vh - 280px)" />
     </div>
   );
 }
 
-function FilterButton({ label, emoji, isActive, onClick, color }) {
+function FilterButton({ label, isActive, onClick, color }) {
   return (
-    <motion.button
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
+    <button
       onClick={onClick}
-      className="px-3 py-1.5 rounded-full text-xs font-medium transition-all"
+      className="px-2.5 py-1 rounded-md text-[11px] font-medium transition-colors"
       style={{
-        background: isActive ? `${color}22` : 'var(--bg-card)',
-        border: `1px solid ${isActive ? color + '44' : 'var(--border-color)'}`,
-        color: isActive ? color : 'var(--text-muted)',
+        background: isActive ? (color ? color + '10' : 'var(--bg-secondary)') : 'transparent',
+        border: `1px solid ${isActive ? (color || 'var(--border-hover)') : 'var(--border-color)'}`,
+        color: isActive ? (color || 'var(--text-primary)') : 'var(--text-muted)',
+        cursor: 'pointer',
       }}
     >
-      <span className="mr-1">{emoji}</span>
       {label}
-    </motion.button>
+    </button>
   );
 }
